@@ -22,11 +22,20 @@ function initMusic() {
         sound.setVolume(0.5);
         sound.autoplay = true;
 
-        const musicButton = document.querySelector('#music-button');
+        const musicButton = document.querySelector('.music-play-button');
         musicButton.addEventListener(
             'click',
             () => {
-                sound.play();
+                if (sound.isPlaying) {
+                    console.log(11111, musicButton, sound, controls);
+                    musicButton.firstElementChild.style.animationPlayState = 'paused';
+                    controls.autoRotate = false;
+                    sound.pause();
+                } else {
+                    musicButton.firstElementChild.style.animationPlayState = 'running';
+                    controls.autoRotate = true;
+                    sound.play();
+                }
             },
             false
         );

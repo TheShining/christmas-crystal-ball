@@ -4,74 +4,17 @@
         <title>Merry Christmas</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-        <style>
-            body {
-                margin: 0;
-                background-color: #000;
-                color: #fff;
-                font-family: Monospace;
-                font-size: 13px;
-                line-height: 24px;
-                overscroll-behavior: none;
-            }
-
-            #info {
-                position: absolute;
-                top: 0px;
-                width: 100%;
-                padding: 10px;
-                box-sizing: border-box;
-                text-align: center;
-                -moz-user-select: none;
-                -webkit-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                pointer-events: none;
-                z-index: 1;
-            }
-
-            .bottom {
-                position: absolute;
-                bottom: 0;
-
-                width: 100%;
-                text-align: end;
-            }
-
-            .bottom .text {
-                margin-right: 10px;
-                font-size: 15px;
-                color: #98261f;
-            }
-
-            .bottom .text .merry {
-                color: #f40002;
-            }
-
-            .bottom .author a {
-                color: #1f8415;
-                text-decoration: none;
-            }
-            .bottom .text img {
-                width: 30px;
-                color: #1f8415;
-                text-decoration: none;
-            }
-
-            a,
-            button,
-            input,
-            select {
-                pointer-events: auto;
-            }
-        </style>
+        <link rel="stylesheet" href="index.css" />
     </head>
 
     <body>
-        <div id="info">
+        <!-- <div id="info">
             <button id="music-button">开始播放音乐</button>
-        </div>
+        </div> -->
         <div class="bottom">
+            <div class="music-play-button">
+                <img src="./background/snowflake.png" alt="" srcset="" />
+            </div>
             <span class="text"
                 ><span class="merry">Merry Christmas</span> from
                 <span class="author"
