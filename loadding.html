@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            @import url('./progress.css');
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            .app {
+                height: 100vh;
+                background-color: rgba(240, 128, 128, 0.1);
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .app .loading-container .loading-item {
+                display: flex;
+                margin-bottom: 6px;
+            }
+
+            .app .loading-container .loading-item img {
+                width: 24px;
+                height: 24px;
+            }
+
+            .app .loading-container .loading-item__1 {
+                animation: loading 1.5s 0s infinite;
+            }
+
+            .app .loading-container .loading-item__2 {
+                animation: loading 1.5s 0.25s infinite;
+            }
+
+            .app .loading-container .loading-item__3 {
+                animation: loading 1.5s 0.5s infinite;
+            }
+
+            .app .loading-container .loading-item__4 {
+                animation: loading 1.5s 0.75s infinite;
+            }
+
+            .app .loading-container .loading-item__5 {
+                animation: loading 1.5s 1s infinite;
+            }
+
+            .app .loading-container .loading-item__6 {
+                animation: loading 1.5s 1.25s infinite;
+            }
+
+            @keyframes loading {
+                0% {
+                    transform: translateY(0px);
+                    opacity: 1;
+                }
+
+                25% {
+                    transform: translateY(6px);
+                }
+
+                50% {
+                    opacity: 0.3;
+                }
+
+                75% {
+                    transform: translateY(-6px);
+                }
+
+                100% {
+                    transform: translateY(0px);
+                    opacity: 1;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app">
+            <div class="loading-container">
+                <div class="loading-item">
+                    <div class="loading-item__1"><img src="./img/christmas_1.png" alt="" /></div>
+                    <div class="loading-item__2"><img src="./img/christmas_2.png" alt="" /></div>
+                    <div class="loading-item__3"><img src="./img/christmas_3.png" alt="" /></div>
+                    <div class="loading-item__4"><img src="./img/christmas_4.png" alt="" /></div>
+                    <div class="loading-item__5"><img src="./img/christmas_5.png" alt="" /></div>
+                    <div class="loading-item__6"><img src="./img/christmas_6.png" alt="" /></div>
+                </div>
+                <div class="progress">
+                    <div
+                        class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar"
+                        style="width: 75%"
+                    ></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

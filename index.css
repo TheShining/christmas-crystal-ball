@@ -35,8 +35,8 @@ body {
 }
 
 .bottom .music-play-button img {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 
     /* animation: button-rotate duration timing-function delay iteration-count direction fill-mode; */
     animation: button-rotate 5s linear 2s infinite;

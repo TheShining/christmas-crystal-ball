@@ -72,7 +72,7 @@ function init() {
     pointLight.shadow.mapSize.height = 2000;
     scene.add(pointLight);
 
-    new RGBELoader().setPath('background/').load('moonless_golf_1k.hdr', function (texture) {
+    new RGBELoader().setPath('models/background/').load('moonless_golf_1k.hdr', function (texture) {
         texture.mapping = THREE.EquirectangularReflectionMapping;
 
         scene.background = texture;
