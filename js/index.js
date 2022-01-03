@@ -5,11 +5,12 @@ const RoughnessMipmapper = THREE.RoughnessMipmapper;
 
 let camera, scene, renderer, controls, pointLight, composer;
 
-let progressCount = 0;
-
 init();
 initMusic();
 
+/**
+ * 音乐初始化
+ */
 function initMusic() {
     //创建音频
     const listener = new THREE.AudioListener();
@@ -46,7 +47,13 @@ function initMusic() {
             console.log(33333, '开始播放', sound.isPlaying, buffer);
         },
         (audioProgress) => {
-            // console.log('audio 加载情况！！！', audioProgress);
+            // audio 加载进度条配额 10%
+            const audioLoadingProgressQuota = 20;
+
+            // 加载进度
+            globalThis.progressCount.musicLoading =
+                audioLoadingProgressQuota * (audioProgress.loaded / audioProgress.total);
+
             if (audioProgress.loaded === audioProgress.total) {
                 console.log('audio 加载完毕！！！');
                 const heartDom = document.querySelector('.envelope-wrapper .heart');
@@ -59,6 +66,9 @@ function initMusic() {
     );
 }
 
+/**
+ * 模型初始化
+ */
 function init() {
     const container = document.querySelector('#christmas-ball');
 
@@ -133,14 +143,16 @@ function init() {
                     animate();
                 },
                 (gltfProgress) => {
-                    // console.log('gltf 加载情况！！！', gltfProgress);
-                    console.log('gltf 加载情况！！！', (gltfProgress.loaded / gltfProgress.total) * 100 + '% loaded');
-                    // if (isGltfStartLoad) {
-                    // 	isGltfStartLoad = false;
-                    // }
                     if (gltfProgress.loaded === gltfProgress.total) {
                         console.log('gltf加载完毕！！！');
-                        // Pace.start();
+
+                        // 接下来模拟 模型bin文件 和贴图png 文件加载
+                        const timer = setInterval(() => {
+                            globalThis.progressCount.gltfLoading++;
+                            if (globalThis.progressCount.gltfLoading >= 60) {
+                                clearInterval(timer);
+                            }
+                        }, globalThis.webPageLoadingStandard * 1.2); // 预留20%突发情况
                     }
                 },
                 function (error) {
@@ -149,8 +161,11 @@ function init() {
             );
         },
         (rgbProgress) => {
-            // console.log('rgb 加载情况！！！', rgbProgress);
-            console.log('rgb 加载情况！！！', (rgbProgress.loaded / rgbProgress.total) * 100 + '% loaded');
+            // rgb 加载进度条配额 10%
+            const rgbLoadingProgressQuota = 10;
+
+            // 加载进度
+            globalThis.progressCount.rgbLoading = rgbLoadingProgressQuota * (rgbProgress.loaded / rgbProgress.total);
 
             if (rgbProgress.loaded === rgbProgress.total) {
                 console.log('rgb加载完毕！！！');
@@ -190,6 +205,9 @@ function init() {
     composer.addPass(effectPass);
 }
 
+/**
+ * 根据窗口大小重设置渲染器尺寸
+ */
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     // camera.updateProjectionMatrix();
@@ -197,6 +215,9 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
+/**
+ * 使模型动起来
+ */
 function animate() {
     requestAnimationFrame(animate);
     pointLight.position.set(camera.position.x + 5, camera.position.y + 5, camera.position.z - 5);

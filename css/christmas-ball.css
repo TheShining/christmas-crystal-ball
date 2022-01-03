@@ -55,16 +55,16 @@
 }
 
 .christmas-ball-container .bottom .text .merry {
-    color: #f40002;
+    color: #1f8415;
 }
 
 .christmas-ball-container .bottom .author a {
-    color: #1f8415;
+    color: #f40002;
     text-decoration: none;
 }
 .christmas-ball-container .bottom .text img {
     width: 30px;
-    color: #1f8415;
+    /* color: #1f8415; */
     text-decoration: none;
 }
 

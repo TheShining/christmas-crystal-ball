@@ -56,6 +56,7 @@
             </div>
         </div>
         <script src="./js/pace.min.js"></script>
+        <script src="./js/loadingProgress.js"></script>
         <script src="./js/three.min.js"></script>
         <script src="./js/OrbitControls.js"></script>
         <script src="./js/GLTFLoader.js"></script>
@@ -67,28 +68,10 @@
             Pace.on('start', (...x) => {
                 console.log('页面开始加载', x);
             });
-
-            Pace.on('done', (...x) => {
-                console.log('页面加载完毕', x, Pace);
-            });
         </script>
         <script>
             const loading = document.querySelector('.app');
             const envelopeContainer = document.querySelector('.envelope-container');
-
-            // 进度条进度
-            const progressBar = document.querySelector('.progress-bar');
-            const loadingContainer = document.querySelector('.loading-container');
-            let count = 0;
-            const timer = setInterval(() => {
-                progressBar.style.width = `${++count}%`;
-                console.log(11111111, count);
-                if (count === 100) {
-                    clearInterval(timer);
-                    envelopeContainer.classList.add('envelope-show');
-                    loadingContainer.style.opacity = 0;
-                }
-            }, 1);
 
             // 开启信封
             const christmasBallContainer = document.querySelector('.christmas-ball-container');
