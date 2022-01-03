@@ -4,13 +4,41 @@
         <title>Merry Christmas</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="./css/index.css" />
     </head>
 
     <body>
-        <!-- <div id="info">
-            <button id="music-button">开始播放音乐</button>
-        </div> -->
+        <div class="app">
+            <div class="envelope-container">
+                <div class="envelope-wrapper">
+                    <div class="envelope">
+                        <div class="card">
+                            <div class="christmas-ball">
+                                <img src="./img/christmas_ball.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heart"></div>
+                </div>
+            </div>
+            <div class="loading-container">
+                <div class="loading-item">
+                    <div class="loading-item__1"><img src="./img/christmas_1.png" alt="" /></div>
+                    <div class="loading-item__2"><img src="./img/christmas_2.png" alt="" /></div>
+                    <div class="loading-item__3"><img src="./img/christmas_3.png" alt="" /></div>
+                    <div class="loading-item__4"><img src="./img/christmas_4.png" alt="" /></div>
+                    <div class="loading-item__5"><img src="./img/christmas_5.png" alt="" /></div>
+                    <div class="loading-item__6"><img src="./img/christmas_6.png" alt="" /></div>
+                </div>
+                <div class="progress">
+                    <div
+                        class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar"
+                        style="width: 0%"
+                    ></div>
+                </div>
+            </div>
+        </div>
         <div class="bottom">
             <div class="music-play-button">
                 <img src="./img/snowflake.png" alt="" srcset="" />
@@ -39,6 +67,37 @@
 
             Pace.on('done', (...x) => {
                 console.log('页面加载完毕', x, Pace);
+            });
+        </script>
+        <script>
+            const envelopeContainer = document.querySelector('.envelope-container');
+
+            // 进度条进度
+            const progressBar = document.querySelector('.progress-bar');
+            const loadingContainer = document.querySelector('.loading-container');
+            let count = 0;
+            const timer = setInterval(() => {
+                progressBar.style.width = `${++count}%`;
+                console.log(11111111, count);
+                if (count === 100) {
+                    clearInterval(timer);
+                    envelopeContainer.classList.add('envelope-show');
+                    loadingContainer.style.opacity = 0;
+                }
+            }, 1);
+
+            // 开启信封
+            const envelopeWrapper = document.querySelector('.envelope-wrapper');
+            const heart = document.querySelector('.envelope-wrapper .heart');
+
+            heart.addEventListener('click', () => {
+                const enveloperClassList = envelopeWrapper.classList;
+                if (enveloperClassList.contains('flap')) {
+                    // envelopeWrapper.classList.remove('flap');
+                } else {
+                    envelopeWrapper.classList.add('flap');
+                    envelopeContainer.classList.add('envelope-magnify');
+                }
             });
         </script>
     </body>

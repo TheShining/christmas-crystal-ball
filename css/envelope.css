@@ -2,7 +2,6 @@
     position: absolute;
     z-index: 4;
     opacity: 0;
-    background-color: #d46466;
 }
 
 .envelope-container.envelope-show {
