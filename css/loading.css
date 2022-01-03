@@ -8,6 +8,16 @@
     align-items: center;
 }
 
+.app.hide {
+    animation: app-hide 10s 2s;
+}
+
+@keyframes app-hide {
+    100% {
+        opacity: 0;
+    }
+}
+
 .app .loading-container {
     transition: opacity 2s;
 }

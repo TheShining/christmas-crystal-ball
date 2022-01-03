@@ -5,6 +5,8 @@ const RoughnessMipmapper = THREE.RoughnessMipmapper;
 
 let camera, scene, renderer, controls, pointLight, composer;
 
+let progressCount = 0;
+
 init();
 initMusic();
 
@@ -45,13 +47,23 @@ function initMusic() {
         },
         (audioProgress) => {
             // console.log('audio 加载情况！！！', audioProgress);
+            if (audioProgress.loaded === audioProgress.total) {
+                console.log('audio 加载完毕！！！');
+                const heartDom = document.querySelector('.envelope-wrapper .heart');
+                heartDom.addEventListener('click', () => {
+                    sound.play();
+                });
+                // Pace.start();
+            }
         }
     );
 }
 
 function init() {
-    const container = document.createElement('div');
-    document.body.appendChild(container);
+    const container = document.querySelector('#christmas-ball');
+
+    // const container = document.createElement('div');
+    // document.body.appendChild(container);
 
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(2, 1, 2.5);

@@ -1,0 +1,77 @@
+.christmas-ball-container {
+    position: relative;
+    height: 100vh;
+}
+
+.christmas-ball-container .bottom {
+    position: absolute;
+    bottom: 0;
+
+    display: flex;
+    justify-content: space-evenly;
+
+    width: 100%;
+    text-align: end;
+}
+
+.christmas-ball-container .bottom .music-play-button img {
+    width: 35px;
+    height: 35px;
+
+    /* animation: button-rotate duration timing-function delay iteration-count direction fill-mode; */
+    animation: button-rotate 5s linear 2s infinite;
+}
+
+.christmas-ball-container .bottom .music-play-button:hover {
+    cursor: pointer;
+}
+
+.christmas-ball-container .bottom .music-play-button:active {
+    transform: scale(0.6);
+}
+
+@keyframes button-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.christmas-ball-container .bottom .text {
+    margin-right: 10px;
+    font-size: 15px;
+    color: #98261f;
+}
+
+.christmas-ball-container .bottom .text .merry {
+    color: #f40002;
+}
+
+.christmas-ball-container .bottom .author a {
+    color: #1f8415;
+    text-decoration: none;
+}
+.christmas-ball-container .bottom .text img {
+    width: 30px;
+    color: #1f8415;
+    text-decoration: none;
+}
+
+a,
+button,
+input,
+select,
+.music-play-button {
+    pointer-events: auto;
+}

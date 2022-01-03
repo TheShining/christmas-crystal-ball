@@ -39,18 +39,21 @@
                 </div>
             </div>
         </div>
-        <div class="bottom">
-            <div class="music-play-button">
-                <img src="./img/snowflake.png" alt="" srcset="" />
-            </div>
-            <span class="text"
-                ><span class="merry">Merry Christmas from</span>
-                <span class="author"
-                    ><a href="https://github.com/TheShining" target="_blank"
-                        ><img src="./img/snowman.png" />Shining</a
+        <div style="display: none" class="christmas-ball-container">
+            <div id="christmas-ball"></div>
+            <div class="bottom">
+                <div class="music-play-button">
+                    <img src="./img/snowflake.png" alt="" srcset="" />
+                </div>
+                <span class="text"
+                    ><span class="merry">Merry Christmas from</span>
+                    <span class="author"
+                        ><a href="https://github.com/TheShining" target="_blank"
+                            ><img src="./img/snowman.png" />Shining</a
+                        ></span
                     ></span
-                ></span
-            >
+                >
+            </div>
         </div>
         <script src="./js/pace.min.js"></script>
         <script src="./js/three.min.js"></script>
@@ -70,6 +73,7 @@
             });
         </script>
         <script>
+            const loading = document.querySelector('.app');
             const envelopeContainer = document.querySelector('.envelope-container');
 
             // 进度条进度
@@ -87,6 +91,7 @@
             }, 1);
 
             // 开启信封
+            const christmasBallContainer = document.querySelector('.christmas-ball-container');
             const envelopeWrapper = document.querySelector('.envelope-wrapper');
             const heart = document.querySelector('.envelope-wrapper .heart');
 
@@ -97,6 +102,11 @@
                 } else {
                     envelopeWrapper.classList.add('flap');
                     envelopeContainer.classList.add('envelope-magnify');
+                    loading.classList.add('hide');
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                        christmasBallContainer.style.display = '';
+                    }, 5000);
                 }
             });
         </script>

@@ -23,7 +23,7 @@
 
 .envelope-container.envelope-magnify {
     /* opacity: 1; */
-    animation: envelope-magnify 10s 2s;
+    animation: envelope-magnify 15s 2s;
 }
 
 @keyframes envelope-magnify {
@@ -33,7 +33,7 @@
 
     100% {
         transform: scale(10) translateY(30vh);
-        opacity: 0;
+        /* opacity: 0; */
     }
 }
 
