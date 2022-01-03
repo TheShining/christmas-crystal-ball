@@ -16,7 +16,7 @@
                 <img src="./img/snowflake.png" alt="" srcset="" />
             </div>
             <span class="text"
-                ><span class="merry">Merry Christmas</span> from
+                ><span class="merry">Merry Christmas from</span>
                 <span class="author"
                     ><a href="https://github.com/TheShining" target="_blank"
                         ><img src="./img/snowman.png" />Shining</a
@@ -24,7 +24,7 @@
                 ></span
             >
         </div>
-
+        <script src="./js/pace.min.js"></script>
         <script src="./js/three.min.js"></script>
         <script src="./js/OrbitControls.js"></script>
         <script src="./js/GLTFLoader.js"></script>
@@ -32,5 +32,14 @@
         <script src="./js/RoughnessMipmapper.js"></script>
         <script src="./js/postprocessing.min.js"></script>
         <script src="./js/index.js"></script>
+        <script>
+            Pace.on('start', (...x) => {
+                console.log('页面开始加载', x);
+            });
+
+            Pace.on('done', (...x) => {
+                console.log('页面加载完毕', x, Pace);
+            });
+        </script>
     </body>
 </html>

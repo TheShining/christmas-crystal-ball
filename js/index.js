@@ -16,31 +16,37 @@ function initMusic() {
 
     // 加载背景音乐
     const audioLoader = new THREE.AudioLoader();
-    audioLoader.load('music/Mariah Carey-All I Want For Christmas Is You.mp3', function (buffer) {
-        sound.setBuffer(buffer);
-        sound.setLoop(true);
-        sound.setVolume(0.5);
-        sound.autoplay = true;
+    audioLoader.load(
+        'music/Mariah Carey-All I Want For Christmas Is You.mp3',
+        function (buffer) {
+            sound.setBuffer(buffer);
+            sound.setLoop(true);
+            sound.setVolume(0.5);
+            sound.autoplay = true;
 
-        const musicButton = document.querySelector('.music-play-button');
-        musicButton.addEventListener(
-            'click',
-            () => {
-                if (sound.isPlaying) {
-                    console.log(11111, musicButton, sound, controls);
-                    musicButton.firstElementChild.style.animationPlayState = 'paused';
-                    controls.autoRotate = false;
-                    sound.pause();
-                } else {
-                    musicButton.firstElementChild.style.animationPlayState = 'running';
-                    controls.autoRotate = true;
-                    sound.play();
-                }
-            },
-            false
-        );
-        console.log(33333, '开始播放', sound.isPlaying, buffer);
-    });
+            const musicButton = document.querySelector('.music-play-button');
+            musicButton.addEventListener(
+                'click',
+                () => {
+                    if (sound.isPlaying) {
+                        console.log(11111, musicButton, sound, controls);
+                        musicButton.firstElementChild.style.animationPlayState = 'paused';
+                        controls.autoRotate = false;
+                        sound.pause();
+                    } else {
+                        musicButton.firstElementChild.style.animationPlayState = 'running';
+                        controls.autoRotate = true;
+                        sound.play();
+                    }
+                },
+                false
+            );
+            console.log(33333, '开始播放', sound.isPlaying, buffer);
+        },
+        (audioProgress) => {
+            // console.log('audio 加载情况！！！', audioProgress);
+        }
+    );
 }
 
 function init() {
@@ -72,46 +78,73 @@ function init() {
     pointLight.shadow.mapSize.height = 2000;
     scene.add(pointLight);
 
-    new RGBELoader().setPath('models/background/').load('moonless_golf_1k.hdr', function (texture) {
-        texture.mapping = THREE.EquirectangularReflectionMapping;
+    new RGBELoader().setPath('models/background/').load(
+        'moonless_golf_1k.hdr',
+        function (texture) {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
 
-        scene.background = texture;
-        scene.environment = texture;
+            scene.background = texture;
+            scene.environment = texture;
 
-        // use of RoughnessMipmapper is optional
-        const roughnessMipmapper = new RoughnessMipmapper(renderer);
+            // use of RoughnessMipmapper is optional
+            const roughnessMipmapper = new RoughnessMipmapper(renderer);
 
-        const loader = new GLTFLoader().setPath('models/');
-        loader.load(
-            'scene.gltf',
-            function (gltf) {
-                gltf.scene.traverse(function (child) {
-                    if (child.isMesh) {
-                        child.castShadow = true;
-                        child.receiveShadow = true;
-                        if (child.material.map) {
-                            child.material.map.anisotropy = 100;
+            // let isGltfStartLoad = true;
+            const loader = new GLTFLoader().setPath('models/');
+            loader.load(
+                'scene.gltf',
+                function (gltf) {
+                    gltf.scene.traverse(function (child) {
+                        if (child.isMesh) {
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+                            if (child.material.map) {
+                                child.material.map.anisotropy = 100;
+                            }
+
+                            roughnessMipmapper.generateMipmaps(child.material);
                         }
+                    });
 
-                        roughnessMipmapper.generateMipmaps(child.material);
+                    const box = new THREE.Box3().setFromObject(gltf.scene);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3()).length();
+                    console.log('物体中心点', center, size);
+
+                    gltf.scene.scale.set(0.007, 0.007, 0.007);
+                    gltf.scene.position.y = -0.6;
+
+                    scene.add(gltf.scene);
+
+                    roughnessMipmapper.dispose();
+
+                    animate();
+                },
+                (gltfProgress) => {
+                    // console.log('gltf 加载情况！！！', gltfProgress);
+                    console.log('gltf 加载情况！！！', (gltfProgress.loaded / gltfProgress.total) * 100 + '% loaded');
+                    // if (isGltfStartLoad) {
+                    // 	isGltfStartLoad = false;
+                    // }
+                    if (gltfProgress.loaded === gltfProgress.total) {
+                        console.log('gltf加载完毕！！！');
+                        // Pace.start();
                     }
-                });
+                },
+                function (error) {
+                    console.error(error);
+                }
+            );
+        },
+        (rgbProgress) => {
+            // console.log('rgb 加载情况！！！', rgbProgress);
+            console.log('rgb 加载情况！！！', (rgbProgress.loaded / rgbProgress.total) * 100 + '% loaded');
 
-                gltf.scene.scale.set(0.007, 0.007, 0.007);
-                gltf.scene.position.y = -0.6;
-
-                scene.add(gltf.scene);
-
-                roughnessMipmapper.dispose();
-
-                animate();
-            },
-            undefined,
-            function (error) {
-                console.error(error);
+            if (rgbProgress.loaded === rgbProgress.total) {
+                console.log('rgb加载完毕！！！');
             }
-        );
-    });
+        }
+    );
 
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);

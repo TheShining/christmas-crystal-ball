@@ -7,6 +7,7 @@
         <title>Document</title>
         <style>
             @import url('./progress.css');
+            @import url('./envelope.css');
             html,
             body {
                 margin: 0;
@@ -83,6 +84,18 @@
     </head>
     <body>
         <div class="app">
+            <div class="envelope-container">
+                <div class="envelope-wrapper">
+                    <div class="envelope">
+                        <div class="card">
+                            <div class="christmas-ball">
+                                <img src="./img/christmas_ball.png" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heart"></div>
+                </div>
+            </div>
             <div class="loading-container">
                 <div class="loading-item">
                     <div class="loading-item__1"><img src="./img/christmas_1.png" alt="" /></div>
@@ -96,10 +109,39 @@
                     <div
                         class="progress-bar progress-bar-striped progress-bar-animated"
                         role="progressbar"
-                        style="width: 75%"
+                        style="width: 0%"
                     ></div>
                 </div>
             </div>
         </div>
+        <script>
+            const envelopeContainer = document.querySelector('.envelope-container');
+
+            // 进度条进度
+            const progressBar = document.querySelector('.progress-bar');
+            let count = 0;
+            const timer = setInterval(() => {
+                progressBar.style.width = `${++count}%`;
+                console.log(11111111, count);
+                if (count === 100) {
+                    clearInterval(timer);
+                    envelopeContainer.classList.add('envelope-show');
+                }
+            }, 1);
+
+            // 开启信封
+            const envelopeWrapper = document.querySelector('.envelope-wrapper');
+            const heart = document.querySelector('.envelope-wrapper .heart');
+
+            heart.addEventListener('click', () => {
+                const enveloperClassList = envelopeWrapper.classList;
+                if (enveloperClassList.contains('flap')) {
+                    // envelopeWrapper.classList.remove('flap');
+                } else {
+                    envelopeWrapper.classList.add('flap');
+                    envelopeContainer.classList.add('envelope-magnify');
+                }
+            });
+        </script>
     </body>
 </html>

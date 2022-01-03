@@ -1,0 +1,141 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.envelope-container {
+    position: absolute;
+    z-index: 4;
+    opacity: 0;
+    background-color: #d46466;
+}
+
+.envelope-container.envelope-show {
+    opacity: 1;
+    animation: envelope-show 3s;
+}
+
+@keyframes envelope-show {
+    0% {
+        transform: translateY(75px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.envelope-container.envelope-magnify {
+    /* opacity: 1; */
+    animation: envelope-magnify 30s;
+}
+
+@keyframes envelope-magnify {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(10) translateY(30vh);
+        opacity: 0;
+    }
+}
+
+.envelope-container .envelope-wrapper {
+    position: relative;
+    background: #b4d2ee;
+}
+.envelope-container .envelope-wrapper .envelope {
+    position: relative;
+    width: 150px;
+    height: 100px;
+}
+.envelope-container .envelope-wrapper .envelope:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    z-index: 2;
+    border-top: 55px solid #d3eafd;
+    border-right: 75px solid transparent;
+    border-left: 75px solid transparent;
+    transform-origin: top;
+    transition: all 0.5s ease-in-out 0.7s;
+}
+.envelope-container .envelope-wrapper .envelope:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    width: 0px;
+    height: 0px;
+    border-top: 50px solid transparent;
+    border-right: 75px solid #b4d2ee;
+    border-bottom: 50px solid #b4d2ee;
+    border-left: 75px solid #b4d2ee;
+}
+.envelope-container .envelope-wrapper .envelope .card {
+    position: absolute;
+    right: 20%;
+    bottom: 0;
+    width: 60%;
+    height: 90%;
+    border-radius: 4px;
+    background: #fff;
+    text-align: center;
+    transition: all 1s ease-in-out;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.envelope-container .envelope-wrapper .envelope .card .christmas-ball {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #c51803;
+    transform: translate(-50%, -50%);
+}
+.envelope-container .envelope-wrapper .envelope .card .christmas-ball img {
+    width: 100%;
+}
+.envelope-container .envelope-wrapper .heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background: #c51803;
+    z-index: 4;
+    transform: translate(-50%, -20%) rotate(45deg);
+    transition: transform 0.5s ease-in-out 1s;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+.envelope-container .envelope-wrapper .heart:before,
+.envelope-container .envelope-wrapper .heart:after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #c51803;
+    border-radius: 50%;
+}
+.envelope-container .envelope-wrapper .heart:before {
+    top: -7.5px;
+}
+.envelope-container .envelope-wrapper .heart:after {
+    right: 7.5px;
+}
+.envelope-container .flap .envelope:before {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+.envelope-container .flap .envelope .card {
+    bottom: 100px;
+    transform: scale(1.5);
+    transition-delay: 1s;
+}
+.envelope-container .flap .heart {
+    transform: rotate(90deg);
+    transition-delay: 0.4s;
+}
