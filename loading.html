@@ -4,82 +4,11 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <link rel="stylesheet" href="envelope.css" />
+        <title>loading</title>
         <style>
-            @import url('./progress.css');
-            @import url('./envelope.css');
-            html,
-            body {
-                margin: 0;
-                padding: 0;
-            }
-
-            .app {
-                height: 100vh;
-                background-color: rgba(240, 128, 128, 0.1);
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .app .loading-container .loading-item {
-                display: flex;
-                margin-bottom: 6px;
-            }
-
-            .app .loading-container .loading-item img {
-                width: 24px;
-                height: 24px;
-            }
-
-            .app .loading-container .loading-item__1 {
-                animation: loading 1.5s 0s infinite;
-            }
-
-            .app .loading-container .loading-item__2 {
-                animation: loading 1.5s 0.25s infinite;
-            }
-
-            .app .loading-container .loading-item__3 {
-                animation: loading 1.5s 0.5s infinite;
-            }
-
-            .app .loading-container .loading-item__4 {
-                animation: loading 1.5s 0.75s infinite;
-            }
-
-            .app .loading-container .loading-item__5 {
-                animation: loading 1.5s 1s infinite;
-            }
-
-            .app .loading-container .loading-item__6 {
-                animation: loading 1.5s 1.25s infinite;
-            }
-
-            @keyframes loading {
-                0% {
-                    transform: translateY(0px);
-                    opacity: 1;
-                }
-
-                25% {
-                    transform: translateY(6px);
-                }
-
-                50% {
-                    opacity: 0.3;
-                }
-
-                75% {
-                    transform: translateY(-6px);
-                }
-
-                100% {
-                    transform: translateY(0px);
-                    opacity: 1;
-                }
-            }
+            @import url('./loading.css');
+            /* @import url('./envelope.css'); */
         </style>
     </head>
     <body>
@@ -119,6 +48,7 @@
 
             // 进度条进度
             const progressBar = document.querySelector('.progress-bar');
+            const loadingContainer = document.querySelector('.loading-container');
             let count = 0;
             const timer = setInterval(() => {
                 progressBar.style.width = `${++count}%`;
@@ -126,6 +56,7 @@
                 if (count === 100) {
                     clearInterval(timer);
                     envelopeContainer.classList.add('envelope-show');
+                    loadingContainer.style.opacity = 0;
                 }
             }, 1);
 
