@@ -148,13 +148,17 @@ function init() {
                         }
                     });
 
+                    // 兼容模型大小，适当缩小与放大
                     const box = new THREE.Box3().setFromObject(gltf.scene);
                     const center = box.getCenter(new THREE.Vector3());
                     const size = box.getSize(new THREE.Vector3()).length();
                     console.log('物体中心点', center, size);
 
-                    gltf.scene.scale.set(0.007, 0.007, 0.007);
-                    gltf.scene.position.y = -0.6;
+                    const zoomOutSize = 2 / size;
+                    gltf.scene.position.y = -(center.y * zoomOutSize);
+                    gltf.scene.scale.set(zoomOutSize, zoomOutSize, zoomOutSize);
+
+                    console.log('物体模型 :', gltf);
 
                     scene.add(gltf.scene);
 
