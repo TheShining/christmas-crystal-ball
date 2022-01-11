@@ -5,6 +5,25 @@ const RoughnessMipmapper = THREE.RoughnessMipmapper;
 
 let camera, scene, renderer, controls, pointLight, composer;
 
+const manager = new THREE.LoadingManager();
+manager.onStart = function (url, itemsLoaded, itemsTotal) {
+    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+};
+
+manager.onLoad = function () {
+    globalThis.progressCount.rgbLoading = 10;
+    globalThis.progressCount.gltfLoading = 60;
+    globalThis.progressCount.musicLoading = 20;
+};
+
+manager.onProgress = function (...x) {
+    console.log('加载进度: ' + x);
+};
+
+manager.onError = function (url) {
+    console.error('加载错误 ' + url);
+};
+
 init();
 initMusic();
 
@@ -18,7 +37,7 @@ function initMusic() {
     const sound = new THREE.Audio(listener);
 
     // 加载背景音乐
-    const audioLoader = new THREE.AudioLoader();
+    const audioLoader = new THREE.AudioLoader(manager);
     audioLoader.load(
         'music/Mariah Carey-All I Want For Christmas Is You.mp3',
         function (buffer) {
@@ -94,13 +113,14 @@ function init() {
     // 添加点光源
     pointLight = new THREE.PointLight(0xfda218, 2, 100);
     pointLight.position.set(20, 20, 20);
-    pointLight.castShadow = true;
-    pointLight.shadow.bias = -0.001;
-    pointLight.shadow.mapSize.width = 2000;
-    pointLight.shadow.mapSize.height = 2000;
-    scene.add(pointLight);
+    // 添加阴影
+    // pointLight.castShadow = true;
+    // pointLight.shadow.bias = -0.001;
+    // pointLight.shadow.mapSize.width = 2000;
+    // pointLight.shadow.mapSize.height = 2000;
+    // scene.add(pointLight);
 
-    new RGBELoader().setPath('models/background/').load(
+    new RGBELoader(manager).setPath('models/background/').load(
         'moonless_golf_1k.hdr',
         function (texture) {
             texture.mapping = THREE.EquirectangularReflectionMapping;
@@ -112,7 +132,7 @@ function init() {
             const roughnessMipmapper = new RoughnessMipmapper(renderer);
 
             // let isGltfStartLoad = true;
-            const loader = new GLTFLoader().setPath('models/');
+            const loader = new GLTFLoader(manager).setPath('models/');
             loader.load(
                 'scene.gltf',
                 function (gltf) {

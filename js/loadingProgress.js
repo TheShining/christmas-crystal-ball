@@ -1,5 +1,3 @@
-updateProgressBar();
-
 /**
  * 进度条进度
  *	total 总进度条 max:100%
@@ -28,7 +26,7 @@ function updateProgressBar() {
     let count = 0;
 
     const timer = setInterval(() => {
-        console.log('总体进度情况', globalThis.progressCount);
+        // console.log('总体进度情况', globalThis.progressCount);
 
         globalThis.progressCount.total =
             globalThis.progressCount.pageWebLoading +
@@ -76,3 +74,5 @@ function webPageLoading() {
         console.log('获取到基准时间:', globalThis.webPageLoadingStandard);
     });
 }
+
+updateProgressBar();
