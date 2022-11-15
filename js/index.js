@@ -134,7 +134,8 @@ function init() {
             // let isGltfStartLoad = true;
             const loader = new GLTFLoader(manager).setPath('models/');
             loader.load(
-                'scene.gltf',
+                // 'scene.gltf',
+                'christmas/untitled.gltf',
                 function (gltf) {
                     gltf.scene.traverse(function (child) {
                         if (child.isMesh) {
